@@ -8,13 +8,14 @@ class Input extends Component {
       <label htmlFor={ elementId }>
         <input
           type={ type }
-          name={ name }
+          // name={ name }
           value={ value }
           elementId={ elementId }
           onChange={ onInputChange }
           checked={ inputCheked }
 
         />
+        {name}
       </label>
     );
   }
