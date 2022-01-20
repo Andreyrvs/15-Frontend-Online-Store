@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { getCategories } from '../services/api';
+import './listagemDeProdutos.css';
 
 class ListagemDeProdutos extends Component {
   constructor() {
@@ -26,7 +27,7 @@ class ListagemDeProdutos extends Component {
     const { categories } = this.state;
     return (
       <section className="page-container">
-        <div>
+        <div className="category-container">
           <div>
             <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
           </div>
