@@ -7,13 +7,22 @@ import './listagemDeProdutos.css';
 class ListagemDeProdutos extends Component {
   constructor() {
     super();
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       categories: [],
+      inputValue: '',
     };
   }
 
   componentDidMount() {
     this.requestCategories();
+  }
+
+  handleChange({ target }) {
+    const { name, value, type, checked } = target;
+    this.setState({
+      [name]: type === 'checkbox' ? checked : value,
+    });
   }
 
   async requestCategories() {
@@ -24,18 +33,18 @@ class ListagemDeProdutos extends Component {
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories, inputValue } = this.state;
     return (
       <section className="page-container">
         <div className="category-container">
           <div>
             <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
           </div>
-          <p>Categorias</p>
+          <p>Categorias:</p>
           {categories.map(({ id, name }) => (
             <Input
               datatest="category"
-              handleChange={ () => {} }
+              handleChange={ this.handleChange }
               key={ id }
               type="radio"
               labelName={ name }
@@ -43,20 +52,25 @@ class ListagemDeProdutos extends Component {
           ))}
         </div>
         <div>
-          <Input
-            datatest="query-input"
-            elementId="input-query"
-            type="text"
-          />
-          <Button
-            btnName="Pesquisar"
-            datatest="query-button"
-            elementid="button-query"
-            handleClick={ () => {} }
-            name="isBtnDisable"
-            type="button"
-            value="isBtnDisable"
-          />
+          <form>
+            <Input
+              datatest="query-input"
+              elementId="input-query"
+              name="inputValue"
+              value={ inputValue }
+              type="text"
+              onInputChange={ this.handleChange }
+            />
+            <Button
+              btnName="Pesquisar"
+              datatest="query-button"
+              elementid="button-query"
+              handleClick={ () => {} }
+              name="isBtnDisable"
+              type="button"
+              // value="isBtnDisable"
+            />
+          </form>
         </div>
       </section>
 
