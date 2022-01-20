@@ -28,32 +28,33 @@ class ListagemDeProdutos extends Component {
       <section className="page-container">
         <div>
           <div>
-            <p>Categorias:</p>
+            <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
           </div>
+          <p>Categorias</p>
           {categories.map(({ id, name }) => (
-            <Button
+            <Input
               datatest="category"
               handleChange={ () => {} }
               key={ id }
-              type="radio button"
-              btnName={ name }
+              type="radio"
+              labelName={ name }
             />
           ))}
         </div>
         <div>
-          <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
           <Input
-            type="input"
-            elementId="input-query"
             datatest="query-input"
+            elementId="input-query"
+            type="text"
           />
           <Button
-            type="button"
-            elementid="button-query"
+            btnName="Pesquisar"
             datatest="query-button"
-            name="isBtnDisable"
-            value="isBtnDisable"
+            elementid="button-query"
             handleClick={ () => {} }
+            name="isBtnDisable"
+            type="button"
+            value="isBtnDisable"
           />
         </div>
       </section>
