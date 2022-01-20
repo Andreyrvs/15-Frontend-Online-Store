@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Button from './Button';
-import Input from './Input';
+import Button from '../components/Button';
+import Input from '../components/Input';
 import { getCategories } from '../services/api';
 
 class ListagemDeProdutos extends Component {
@@ -25,15 +25,14 @@ class ListagemDeProdutos extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <>
+      <section className="page-container">
         <div>
-          <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
-        </div>
-        <div>
+          <div>
+            <p>Categorias:</p>
+          </div>
           {categories.map(({ id, name }) => (
             <Button
               datatest="category"
-              elementId="button-category"
               handleChange={ () => {} }
               key={ id }
               type="radio button"
@@ -50,14 +49,14 @@ class ListagemDeProdutos extends Component {
           />
           <Button
             type="button"
-            elementId="button-query"
+            elementid="button-query"
             datatest="query-button"
             name="isBtnDisable"
             value="isBtnDisable"
             handleClick={ () => {} }
           />
         </div>
-      </>
+      </section>
 
     );
   }

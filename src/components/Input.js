@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
   render() {
-    const { type, name, value, elementId, onInputChange, inputCheked } = this.props;
+    const { type, name, value, elementid, onInputChange, inputCheked } = this.props;
     return (
-      <label htmlFor={ elementId }>
+      <label htmlFor={ elementid }>
         <input
           type={ type }
-          // name={ name }
+          name={ name }
           value={ value }
-          elementId={ elementId }
+          id={ elementid }
           onChange={ onInputChange }
           checked={ inputCheked }
 
