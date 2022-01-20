@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import Button from '../components/Button';
+import CardProduct from '../components/CardProduct';
 import Input from '../components/Input';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import './listagemDeProdutos.css';
 
 class ListagemDeProdutos extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    this.categoryAndQuery = this.categoryAndQuery.bind(this);
+
     this.state = {
       categories: [],
       inputValue: '',
+      search: [],
     };
   }
 
@@ -25,6 +29,16 @@ class ListagemDeProdutos extends Component {
     });
   }
 
+  async categoryAndQuery(event) {
+    event.preventDefault(event);
+    const { inputValue } = this.state;
+    const resolve = await getProductsFromCategoryAndQuery('', inputValue);
+    console.log(resolve.results);
+    this.setState({
+      search: resolve.results,
+    });
+  }
+
   async requestCategories() {
     const categories = await getCategories();
     this.setState({
@@ -33,7 +47,7 @@ class ListagemDeProdutos extends Component {
   }
 
   render() {
-    const { categories, inputValue } = this.state;
+    const { categories, inputValue, search } = this.state;
     return (
       <section className="page-container">
         <div className="category-container">
@@ -52,7 +66,7 @@ class ListagemDeProdutos extends Component {
           ))}
         </div>
         <div>
-          <form>
+          <form onSubmit={ (event) => this.categoryAndQuery(event) }>
             <Input
               datatest="query-input"
               elementId="input-query"
@@ -67,11 +81,20 @@ class ListagemDeProdutos extends Component {
               elementid="button-query"
               handleClick={ () => {} }
               name="isBtnDisable"
-              type="button"
+              type="submit"
               // value="isBtnDisable"
             />
           </form>
         </div>
+        <section>
+          {search.map((produto) => (
+            <section key={ produto.id }>
+              <CardProduct
+                searchResult={ produto }
+              />
+            </section>
+          ))}
+        </section>
       </section>
 
     );
