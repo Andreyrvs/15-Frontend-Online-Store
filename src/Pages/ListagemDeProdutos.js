@@ -33,7 +33,6 @@ class ListagemDeProdutos extends Component {
     event.preventDefault(event);
     const { inputValue } = this.state;
     const resolve = await getProductsFromCategoryAndQuery('', inputValue);
-    console.log(resolve.results);
     this.setState({
       search: resolve.results,
     });
@@ -87,12 +86,14 @@ class ListagemDeProdutos extends Component {
             </form>
           </div>
           <section className="product-container">
-            {search.map((produto) => (
-              <CardProduct
-                searchResult={ produto }
-                key={ produto.id }
-              />
-            ))}
+            {search.length === 0 ? <p>Nenhum produto foi encontrado</p> : (
+              search.map((produto) => (
+                <CardProduct
+                  searchResult={ produto }
+                  key={ produto.id }
+                />
+              ))
+            )}
           </section>
         </section>
       </section>

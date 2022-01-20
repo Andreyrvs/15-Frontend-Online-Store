@@ -33,6 +33,7 @@ Button.propTypes = {
   btnName: PropTypes.string,
   datatest: PropTypes.string,
   elementId: PropTypes.string,
+  handleClick: PropTypes.func,
   name: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.bool,
