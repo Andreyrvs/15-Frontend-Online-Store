@@ -1,9 +1,36 @@
 .page-container {
   display: flex;
+  background-color: #e6e6e6;
   flex-flow: row;
+  height: 1024px;
+  width: 1440px;
+  margin: 0 auto;
 }
 
 .category-container {
   display: flex;
+  flex-direction: column; 
+}
+
+.search-container {
+  display: flex;
   flex-direction: column;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+}
+
+.product-item-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.product-title {
+  display: flex;
+  flex-flow: wrap;
+  width: 200px;
 }

@@ -5,13 +5,11 @@ class CardProduct extends Component {
   render() {
     const { searchResult: { title, thumbnail, price } } = this.props;
     return (
-      <div>
-        <section data-testid="product">
-          <span>{title}</span>
-          <img src={ thumbnail } alt={ title } />
-          <span>{`R$:${price}`}</span>
-        </section>
-      </div>
+      <section data-testid="product" className="product-item-container">
+        <p className="product-title">{ title }</p>
+        <img src={ thumbnail } alt={ title } height="200vmin" width="200vmin" />
+        <span>{`R$:${price}`}</span>
+      </section>
     );
   }
 }

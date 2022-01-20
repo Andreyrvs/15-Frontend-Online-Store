@@ -65,35 +65,35 @@ class ListagemDeProdutos extends Component {
             />
           ))}
         </div>
-        <div>
-          <form onSubmit={ (event) => this.categoryAndQuery(event) }>
-            <Input
-              datatest="query-input"
-              elementId="input-query"
-              name="inputValue"
-              value={ inputValue }
-              type="text"
-              onInputChange={ this.handleChange }
-            />
-            <Button
-              btnName="Pesquisar"
-              datatest="query-button"
-              elementid="button-query"
-              handleClick={ () => {} }
-              name="isBtnDisable"
-              type="submit"
-              // value="isBtnDisable"
-            />
-          </form>
-        </div>
-        <section>
-          {search.map((produto) => (
-            <section key={ produto.id }>
+        <section className="search-container">
+          <div>
+            <form onSubmit={ (event) => this.categoryAndQuery(event) }>
+              <Input
+                datatest="query-input"
+                elementId="input-query"
+                name="inputValue"
+                value={ inputValue }
+                type="text"
+                onInputChange={ this.handleChange }
+              />
+              <Button
+                btnName="Pesquisar"
+                datatest="query-button"
+                elementid="button-query"
+                handleClick={ () => {} }
+                name="isBtnDisable"
+                type="submit"
+              />
+            </form>
+          </div>
+          <section className="product-container">
+            {search.map((produto) => (
               <CardProduct
                 searchResult={ produto }
+                key={ produto.id }
               />
-            </section>
-          ))}
+            ))}
+          </section>
         </section>
       </section>
 
