@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import CardProduct from '../components/CardProduct';
 import Input from '../components/Input';
@@ -85,19 +86,22 @@ class ListagemDeProdutos extends Component {
               />
             </form>
           </div>
+          <div>
+            <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+              Ícone Carrinho de Compras
+            </Link>
+          </div>
           <section className="product-container">
-            {search.length === 0 ? <p>Nenhum produto foi encontrado</p> : (
+            {search.length === 0 ? (
+              <p>Nenhum produto foi encontrado</p>
+            ) : (
               search.map((produto) => (
-                <CardProduct
-                  searchResult={ produto }
-                  key={ produto.id }
-                />
+                <CardProduct searchResult={ produto } key={ produto.id } />
               ))
             )}
           </section>
         </section>
       </section>
-
     );
   }
 }
