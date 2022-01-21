@@ -31,13 +31,9 @@ class ListagemDeProdutos extends Component {
     });
   }
 
-  async categoryAndQuery(event) {
-    event.preventDefault(event);
-    const { inputValue } = this.state;
-    const resolve = await getProductsFromCategoryAndQuery('', inputValue);
-    this.setState({
-      search: resolve.results,
-    });
+  async getProductsListFromCategory({ target }) {
+    const products = await getProductsFromCategoryAndQuery(target.id);
+    this.setState({ search: products.results });
   }
 
   async requestCategories() {
@@ -47,9 +43,13 @@ class ListagemDeProdutos extends Component {
     });
   }
 
-  async getProductsListFromCategory ({ target }) {
-    const products = await getProductsFromCategoryAndQuery(target.id);
-    this.setState({ search: products.results });
+  async categoryAndQuery(event) {
+    event.preventDefault(event);
+    const { inputValue } = this.state;
+    const resolve = await getProductsFromCategoryAndQuery('', inputValue);
+    this.setState({
+      search: resolve.results,
+    });
   }
 
   render() {
@@ -63,16 +63,16 @@ class ListagemDeProdutos extends Component {
           <p>Categorias:</p>
           {categories.map(({ id, name }) => (
             <li key={ id }>
-            <button
-              type="button"
-              data-testid="category"
-              name={ name }
-              id={ id }
-              onClick={ this.getProductsListFromCategory }
-            >
-              {name}
-            </button>
-          </li>
+              <button
+                type="button"
+                data-testid="category"
+                name={ name }
+                id={ id }
+                onClick={ this.getProductsListFromCategory }
+              >
+                {name}
+              </button>
+            </li>
           ))}
         </div>
         <section className="search-container">
