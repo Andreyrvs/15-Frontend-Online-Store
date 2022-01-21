@@ -58,7 +58,11 @@ class ListagemDeProdutos extends Component {
       <section className="page-container">
         <div className="category-container">
           <div>
-            <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
+            <p
+              data-testid="home-initial-message"
+            >
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
           </div>
           <p>Categorias:</p>
           {categories.map(({ id, name }) => (
