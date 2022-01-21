@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 
 class CardProduct extends Component {
   render() {
@@ -7,8 +8,12 @@ class CardProduct extends Component {
     return (
       <section data-testid="product" className="product-item-container">
         <p className="product-title">{ title }</p>
-        <img src={ thumbnail } alt={ title } height="200vmin" width="200vmin" />
+        <img className="product-item-img" src={ thumbnail } alt={ title } />
         <span>{`R$:${price}`}</span>
+        <Button
+          datatest="product-add-to-cart "
+          btnName="Adicionar ao Carrinho"
+        />
       </section>
     );
   }

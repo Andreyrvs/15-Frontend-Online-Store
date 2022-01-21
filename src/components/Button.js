@@ -13,18 +13,16 @@ class Button extends Component {
       value,
     } = this.props;
     return (
-      <div>
-        <button
-          data-testid={ datatest }
-          disabled={ value }
-          id={ elementid }
-          name={ name }
-          onClick={ handleClick }
-          type={ type === 'button' ? 'button' : 'submit' }
-        >
-          {btnName}
-        </button>
-      </div>
+      <button
+        data-testid={ datatest }
+        disabled={ value }
+        id={ elementid }
+        name={ name }
+        onClick={ handleClick }
+        type={ type === 'button' ? 'button' : 'submit' }
+      >
+        {btnName}
+      </button>
     );
   }
 }

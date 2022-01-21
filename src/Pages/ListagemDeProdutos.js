@@ -68,6 +68,7 @@ class ListagemDeProdutos extends Component {
                 data-testid="category"
                 name={ name }
                 id={ id }
+                className="category-btn"
                 onClick={ this.getProductsListFromCategory }
               >
                 {name}
@@ -106,7 +107,10 @@ class ListagemDeProdutos extends Component {
               <p>Nenhum produto foi encontrado</p>
             ) : (
               search.map((produto) => (
-                <CardProduct searchResult={ produto } key={ produto.id } />
+                <CardProduct
+                  searchResult={ produto }
+                  key={ produto.id }
+                />
               ))
             )}
           </section>
