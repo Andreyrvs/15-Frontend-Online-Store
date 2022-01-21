@@ -11,6 +11,7 @@ class ListagemDeProdutos extends Component {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
+    this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
 
     this.state = {
       categories: [],
@@ -46,6 +47,11 @@ class ListagemDeProdutos extends Component {
     });
   }
 
+  async getProductsListFromCategory ({ target }) {
+    const products = await getProductsFromCategoryAndQuery(target.id);
+    this.setState({ search: products.results });
+  }
+
   render() {
     const { categories, inputValue, search } = this.state;
     return (
@@ -56,13 +62,17 @@ class ListagemDeProdutos extends Component {
           </div>
           <p>Categorias:</p>
           {categories.map(({ id, name }) => (
-            <Input
-              datatest="category"
-              handleChange={ this.handleChange }
-              key={ id }
-              type="radio"
-              labelName={ name }
-            />
+            <li key={ id }>
+            <button
+              type="button"
+              data-testid="category"
+              name={ name }
+              id={ id }
+              onClick={ this.getProductsListFromCategory }
+            >
+              {name}
+            </button>
+          </li>
           ))}
         </div>
         <section className="search-container">
