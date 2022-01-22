@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from './Button';
 
 class CardProduct extends Component {
   render() {
@@ -17,9 +18,10 @@ class CardProduct extends Component {
             data-testid="product-detail-link"
             to={ `/product/${id}` }
           >
-            <button type="button">
-              Detalhes
-            </button>
+            <Button
+              type="button"
+              btnName="Detalhes"
+            />
           </Link>
         </section>
       </div>

@@ -10,9 +10,9 @@ function App() {
     <div className="App" data-testid="home-initial-message">
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ ListagemDeProdutos } />
+          <Route path="/product/:id" component={ ProductsDetails } />
           <Route path="/ShoppingCart" component={ ShoppingCart } />
-          <Route exact path="/product/:id" component={ ProductsDetails } />
+          <Route exact path="/" component={ ListagemDeProdutos } />
         </Switch>
       </BrowserRouter>
     </div>
