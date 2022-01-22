@@ -47,6 +47,7 @@ class ListagemDeProdutos extends Component {
     event.preventDefault(event);
     const { inputValue } = this.state;
     const resolve = await getProductsFromCategoryAndQuery('', inputValue);
+    console.log(resolve);
     this.setState({
       search: resolve.results,
     });
@@ -111,10 +112,22 @@ class ListagemDeProdutos extends Component {
               <p>Nenhum produto foi encontrado</p>
             ) : (
               search.map((produto) => (
-                <CardProduct
-                  searchResult={ produto }
+                /* console.log(produto) */
+                <section
                   key={ produto.id }
-                />
+                  data-testid="product"
+                  className="product-item-container"
+                >
+                  <CardProduct
+                    searchResult={ produto }
+                  />
+                  <Link to={ `/ShoppingCart/${produto.title}` }>
+                    <Button
+                      datatest="product-add-to-cart "
+                      btnName="Adicionar ao Carrinho"
+                    />
+                  </Link>
+                </section>
               ))
             )}
           </section>
