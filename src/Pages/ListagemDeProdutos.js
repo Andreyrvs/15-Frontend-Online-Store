@@ -39,10 +39,9 @@ class ListagemDeProdutos extends Component {
   }
 
   setProductLocalStorage(product) {
-    localStorage.setItem('product', JSON.stringify(product));
     this.setState((prevState) => ({
       productSave: [...prevState.productSave, product],
-    }));
+    }), () => localStorage.setItem('product', JSON.stringify(product)));
   }
 
   async requestCategories() {
