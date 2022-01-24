@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
-    this.productCart = this.productCart.bind(this);
+    this.getLocalStorage = this.getLocalStorage.bind(this);
     this.state = {
-      product: '',
+      item: [],
     };
   }
 
-  async productCart() {
-    // const { product } = this.state;
+  componentDidMount() {
+    this.getLocalStorage();
+  }
 
-    const { match: { params: { id } } } = this.props;
-    const response = await getProductsFromCategoryAndQuery('', id);
-    console.log(response);
+  getLocalStorage() {
+    const products = localStorage.getItem('product');
     this.setState({
-      product: response,
+      item: products,
     });
   }
 
   render() {
-    const { product } = this.state;
+    const { item } = this.state;
     return (
       <section className="page-container">
-        {product.length === 0
+        {!item
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           : (
             <section data-testid="shopping-cart-product-name">
-              {product}
+              <span>
+                {item}
+              </span>
+              <span data-testid="shopping-cart-product-quantity">
+                {item.length}
+              </span>
             </section>
 
           )}
-
       </section>
     );
   }

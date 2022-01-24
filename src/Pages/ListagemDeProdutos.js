@@ -12,7 +12,6 @@ class ListagemDeProdutos extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
     this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
-
     this.state = {
       categories: [],
       inputValue: '',
@@ -47,7 +46,7 @@ class ListagemDeProdutos extends Component {
     event.preventDefault(event);
     const { inputValue } = this.state;
     const resolve = await getProductsFromCategoryAndQuery('', inputValue);
-    console.log(resolve);
+    console.log(resolve.results[0]);
     this.setState({
       search: resolve.results,
     });
@@ -96,7 +95,7 @@ class ListagemDeProdutos extends Component {
                 btnName="Pesquisar"
                 datatest="query-button"
                 elementid="button-query"
-                handleClick={ () => {} }
+                handleClick={ this.handleChange }
                 name="isBtnDisable"
                 type="submit"
               />
@@ -112,22 +111,10 @@ class ListagemDeProdutos extends Component {
               <p>Nenhum produto foi encontrado</p>
             ) : (
               search.map((produto) => (
-                /* console.log(produto) */
-                <section
+                <CardProduct
                   key={ produto.id }
-                  data-testid="product"
-                  className="product-item-container"
-                >
-                  <CardProduct
-                    searchResult={ produto }
-                  />
-                  <Link to={ `/ShoppingCart/${produto.title}` }>
-                    <Button
-                      datatest="product-add-to-cart "
-                      btnName="Adicionar ao Carrinho"
-                    />
-                  </Link>
-                </section>
+                  searchResult={ produto }
+                />
               ))
             )}
           </section>
