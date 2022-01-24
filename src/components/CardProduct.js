@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 
 class CardProduct extends Component {
@@ -8,7 +9,7 @@ class CardProduct extends Component {
     this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      productSave: '',
+      productSave: [],
     };
   }
 
@@ -16,40 +17,48 @@ class CardProduct extends Component {
     const { name, value, type, checked } = target;
     this.setState({
       [name]: type === 'checkbox' ? checked : value,
-    });
+    }, this.setProductLocalStorage);
   }
 
   setProductLocalStorage() {
-    const { searchResult: { title, id, price } } = this.props;
-    const { productSave } = this.state;
-    const productStorage = {
-      id,
-      title,
-      price,
-    };
+    const { searchResult: { title } } = this.props;
+    // const { productSave } = this.state;
 
-    this.setState({
-      productSave: productStorage,
-    });
-    localStorage.setItem('product', JSON.stringify(productSave));
+    // this.setState({
+    //   productSave: title,
+    // });
+    localStorage.setItem('product', JSON.stringify(title));
   }
 
   render() {
-    const { searchResult: { title, thumbnail, price } } = this.props;
+    const { searchResult: { title, thumbnail, price, id } } = this.props;
     return (
-      <section
-        data-testid="product"
-        className="product-item-container"
-      >
-        <p className="product-title">{ title }</p>
-        <img className="product-item-img" src={ thumbnail } alt={ title } />
-        <span>{`R$:${price}`}</span>
-        <Button
-          datatest="product-add-to-cart "
-          btnName="Adicionar ao Carrinho"
-          handleClick={ this.setProductLocalStorage }
-        />
-      </section>
+      <>
+        <section
+          data-testid="product"
+          className="product-item-container"
+        >
+          <p className="product-title">{ title }</p>
+          <img className="product-item-img" src={ thumbnail } alt={ title } />
+          <span>{`R$:${price}`}</span>
+          <Link
+            data-testid="product-detail-link"
+            to={ `/product/${id}` }
+          >
+            <Button
+              type="button"
+              btnName="Detalhes"
+            />
+          </Link>
+          <Button
+            datatest="product-add-to-cart "
+            btnName="Adicionar ao Carrinho"
+            handleClick={ this.setProductLocalStorage }
+          />
+        </section>
+        {/* <section /> */}
+      </>
+
     );
   }
 }

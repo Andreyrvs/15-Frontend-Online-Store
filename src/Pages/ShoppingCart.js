@@ -29,10 +29,10 @@ class ShoppingCart extends Component {
           : (
             <section data-testid="shopping-cart-product-name">
               <span>
-                {item}
+                {`Produto:${item}`}
               </span>
               <span data-testid="shopping-cart-product-quantity">
-                {item.length}
+                {`Quantidade${item.length}`}
               </span>
             </section>
 
