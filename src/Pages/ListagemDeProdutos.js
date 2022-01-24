@@ -12,13 +12,13 @@ class ListagemDeProdutos extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
     this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
-    this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
+    // this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
 
     this.state = {
       categories: [],
       inputValue: '',
       search: [],
-      productSave: [],
+
     };
   }
 
@@ -38,11 +38,8 @@ class ListagemDeProdutos extends Component {
     this.setState({ search: products.results });
   }
 
-  setProductLocalStorage(product) {
-    localStorage.setItem('product', JSON.stringify(product));
-    this.setState((prevState) => ({
-      productSave: [...prevState.productSave, product],
-    }));
+  setProductLocalStorage() {
+
   }
 
   async requestCategories() {
@@ -132,7 +129,7 @@ class ListagemDeProdutos extends Component {
                   <Button
                     datatest="product-add-to-cart "
                     btnName="Adicionar ao Carrinho"
-                    handleClick={ this.setProductLocalStorage(produto) }
+                    handleClick={ () => {} }
                   />
                 </section>
               ))
