@@ -4,24 +4,6 @@ import { Link } from 'react-router-dom';
 import Button from './Button';
 
 class CardProduct extends Component {
-  constructor() {
-    super();
-    // this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
-    this.state = {
-      // productSave: [],
-    };
-  }
-
-  // setProductLocalStorage() {
-  //   const { searchResult: { title } } = this.props;
-  //   const { productSave } = this.state;
-
-  //   const cart = [...productSave, { title, qty: 1 }];
-  //   this.setState({
-  //     productSave: cart,
-  //   }, localStorage.setItem('product', JSON.stringify(cart)));
-  // }
-
   render() {
     const { searchResult: { title, thumbnail, price, id } } = this.props;
     return (
