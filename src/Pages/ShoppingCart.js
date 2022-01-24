@@ -28,12 +28,12 @@ class ShoppingCart extends Component {
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           : (
             <section data-testid="shopping-cart-product-name">
-              <span>
-                {`Produto:${item}`}
-              </span>
-              <span data-testid="shopping-cart-product-quantity">
-                {`Quantidade${item.length}`}
-              </span>
+              <p>
+                {item}
+              </p>
+              <p data-testid="shopping-cart-product-quantity">
+                {item.length}
+              </p>
             </section>
 
           )}

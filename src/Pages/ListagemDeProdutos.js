@@ -12,10 +12,13 @@ class ListagemDeProdutos extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
     this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
+    this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
+
     this.state = {
       categories: [],
       inputValue: '',
       search: [],
+      productSave: [],
     };
   }
 
@@ -33,6 +36,15 @@ class ListagemDeProdutos extends Component {
   async getProductsListFromCategory({ target }) {
     const products = await getProductsFromCategoryAndQuery(target.id);
     this.setState({ search: products.results });
+  }
+
+  setProductLocalStorage() {
+    const { search, productSave } = this.state;
+
+    const cart = [...productSave, { search, qty: 1 }];
+    this.setState({
+      productSave: cart,
+    }, localStorage.setItem('product', JSON.stringify(cart)));
   }
 
   async requestCategories() {
@@ -111,10 +123,17 @@ class ListagemDeProdutos extends Component {
               <p>Nenhum produto foi encontrado</p>
             ) : (
               search.map((produto) => (
-                <CardProduct
-                  key={ produto.id }
-                  searchResult={ produto }
-                />
+                <>
+                  <CardProduct
+                    key={ produto.id }
+                    searchResult={ produto }
+                  />
+                  <Button
+                    datatest="product-add-to-cart "
+                    btnName="Adicionar ao Carrinho"
+                    handleClick={ this.setProductLocalStorage }
+                  />
+                </>
               ))
             )}
           </section>
