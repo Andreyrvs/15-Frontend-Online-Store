@@ -25,10 +25,7 @@ class CardProduct extends Component {
   render() {
     const { searchResult: { title, thumbnail, price, id } } = this.props;
     return (
-      <section
-        data-testid="product"
-        className="product-item-container"
-      >
+      < >
         <p className="product-title">{ title }</p>
         <img className="product-item-img" src={ thumbnail } alt={ title } />
         <span>{`R$:${price}`}</span>
@@ -41,12 +38,7 @@ class CardProduct extends Component {
             btnName="Detalhes"
           />
         </Link>
-        {/* <Button
-          datatest="product-add-to-cart "
-          btnName="Adicionar ao Carrinho"
-          handleClick={ this.setProductLocalStorage }
-        /> */}
-      </section>
+      </>
 
     );
   }

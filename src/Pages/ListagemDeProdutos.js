@@ -41,7 +41,7 @@ class ListagemDeProdutos extends Component {
   setProductLocalStorage() {
     const { search, productSave } = this.state;
 
-    const cart = [...productSave, { search, qty: 1 }];
+    const cart = [...productSave, { product: search.map((el) => el.title), qty: 1 }];
     this.setState({
       productSave: cart,
     }, localStorage.setItem('product', JSON.stringify(cart)));
@@ -123,9 +123,12 @@ class ListagemDeProdutos extends Component {
               <p>Nenhum produto foi encontrado</p>
             ) : (
               search.map((produto) => (
-                <>
+                <section
+                  key={ produto.id }
+                  data-testid="product"
+                  className="product-item-container"
+                >
                   <CardProduct
-                    key={ produto.id }
                     searchResult={ produto }
                   />
                   <Button
@@ -133,7 +136,7 @@ class ListagemDeProdutos extends Component {
                     btnName="Adicionar ao Carrinho"
                     handleClick={ this.setProductLocalStorage }
                   />
-                </>
+                </section>
               ))
             )}
           </section>
