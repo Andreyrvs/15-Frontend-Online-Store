@@ -30,7 +30,7 @@ class ListagemDeProdutos extends Component {
     const { name, value, type, checked } = target;
     this.setState({
       [name]: type === 'checkbox' ? checked : value,
-    });
+    }, this.setProductLocalStorage());
   }
 
   async getProductsListFromCategory({ target }) {
@@ -38,13 +38,13 @@ class ListagemDeProdutos extends Component {
     this.setState({ search: products.results });
   }
 
-  setProductLocalStorage() {
-    const { search, productSave } = this.state;
+  setProductLocalStorage(product) {
+    const { productSave } = this.state;
 
-    const cart = [...productSave, { product: search.map((el) => el.title), qty: 1 }];
     this.setState({
-      productSave: cart,
-    }, localStorage.setItem('product', JSON.stringify(cart)));
+      productSave: [...productSave, { product }],
+    });
+    localStorage.setItem('product', JSON.stringify(productSave));
   }
 
   async requestCategories() {
@@ -134,7 +134,7 @@ class ListagemDeProdutos extends Component {
                   <Button
                     datatest="product-add-to-cart "
                     btnName="Adicionar ao Carrinho"
-                    handleClick={ this.setProductLocalStorage }
+                    handleClick={ () => this.setProductLocalStorage(produto.title) }
                   />
                 </section>
               ))

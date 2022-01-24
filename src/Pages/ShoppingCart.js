@@ -15,6 +15,7 @@ class ShoppingCart extends Component {
 
   getLocalStorage() {
     const products = localStorage.getItem('product');
+    console.log(products);
     this.setState({
       item: products,
     });
