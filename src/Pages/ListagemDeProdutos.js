@@ -39,9 +39,14 @@ class ListagemDeProdutos extends Component {
   }
 
   setProductLocalStorage(product) {
-    this.setState((prevState) => ({
-      productSave: [...prevState.productSave, product],
-    }), () => localStorage.setItem('product', JSON.stringify(product)));
+    const empty = [];
+    const products = [...empty, { product, qty: 1 }];
+    localStorage.setItem('p', JSON.stringify(products));
+
+    // const { productSave } = this.state;
+    // this.setState((prevState) => ({
+    //   productSave: [...prevState.productSave, { products: product, qty: 1 }],
+    // }), () => localStorage.setItem('products', JSON.stringify(productSave)));
   }
 
   async requestCategories() {
@@ -131,7 +136,7 @@ class ListagemDeProdutos extends Component {
                   <Button
                     datatest="product-add-to-cart "
                     btnName="Adicionar ao Carrinho"
-                    handleClick={ () => this.setProductLocalStorage(produto) }
+                    handleClick={ () => this.setProductLocalStorage(produto.title) }
                   />
                 </section>
               ))
