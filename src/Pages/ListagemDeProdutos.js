@@ -18,6 +18,7 @@ class ListagemDeProdutos extends Component {
       categories: [],
       inputValue: '',
       search: [],
+      productSave: [],
     };
   }
 
@@ -38,6 +39,7 @@ class ListagemDeProdutos extends Component {
   }
 
   setProductLocalStorage(product) {
+    // const { productSave } = this.state;
     const empty = [];
     const products = [...empty, { product, qty: 1 }];
     localStorage.setItem('products', JSON.stringify(products));
