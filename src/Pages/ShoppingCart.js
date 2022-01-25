@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class ShoppingCart extends Component {
   render() {
-    const product = localStorage.getItem('p');
+    const product = localStorage.getItem('products');
     return (
       <section className="page-container">
         {!product
