@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ProductsDetails extends React.Component {
   constructor() {
@@ -8,6 +9,7 @@ class ProductsDetails extends React.Component {
       product: {},
     };
     this.getDetails = this.getDetails.bind(this);
+    this.toShoppingCart = this.toShoppingCart.bind(this);
   }
 
   componentDidMount() {
@@ -28,14 +30,38 @@ class ProductsDetails extends React.Component {
     });
   }
 
+  toShoppingCart() {
+    const { product } = this.state;
+    const arrayAntigo = localStorage.getItem('chave');
+    if (arrayAntigo !== null) {
+      const novoArray = [...JSON.parse(arrayAntigo), product];
+      localStorage.setItem('chave', JSON.stringify(novoArray));
+    } else {
+      const novoArray = [product];
+      localStorage.setItem('chave', JSON.stringify(novoArray));
+    }
+  }
+
   render() {
     const { product } = this.state;
     return (
       <div>
-        <p>{ product.id }</p>
-        <p data-testid="product-detail-name">{ product.title }</p>
+        <p>{product.id}</p>
+        <p data-testid="product-detail-name">{product.title}</p>
         <img src={ product.thumbnail } alt={ product.title } />
-        <p>{ product.price }</p>
+        <p>{product.price}</p>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ this.toShoppingCart }
+        >
+          Adicionar ao Carrinho
+        </button>
+        <div>
+          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+            Ícone Carrinho de Compras
+          </Link>
+        </div>
       </div>
     );
   }
