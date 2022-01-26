@@ -13,11 +13,11 @@ class ListagemDeProdutos extends Component {
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
     this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
     this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
-
+    // this.getDetails = this.getDetails.bind(this);
     this.state = {
       categories: [],
       inputValue: '',
-      search: [],
+      receiveAPI: [],
       productSave: {},
     };
   }
@@ -35,7 +35,7 @@ class ListagemDeProdutos extends Component {
 
   async getProductsListFromCategory({ target }) {
     const products = await getProductsFromCategoryAndQuery(target.id);
-    this.setState({ search: products.results });
+    this.setState({ receiveAPI: products.results });
   }
 
   setProductLocalStorage() {
@@ -64,12 +64,12 @@ class ListagemDeProdutos extends Component {
     const resolve = await getProductsFromCategoryAndQuery('', inputValue);
     console.log(resolve.results[0]);
     this.setState({
-      search: resolve.results,
+      receiveAPI: resolve.results,
     });
   }
 
   render() {
-    const { categories, inputValue, search } = this.state;
+    const { categories, inputValue, receiveAPI } = this.state;
     return (
       <section className="page-container">
         <div className="category-container">
@@ -96,8 +96,8 @@ class ListagemDeProdutos extends Component {
             </li>
           ))}
         </div>
-        <section className="search-container">
-          <div>
+        <section>
+          <div className="search-container">
             <form onSubmit={ (event) => this.categoryAndQuery(event) }>
               <Input
                 datatest="query-input"
@@ -108,13 +108,13 @@ class ListagemDeProdutos extends Component {
                 onInputChange={ this.handleChange }
               />
               <Button
-                btnName="Pesquisar"
                 datatest="query-button"
                 elementid="button-query"
                 handleClick={ this.handleChange }
-                name="isBtnDisable"
                 type="submit"
-              />
+              >
+                Pesquisar
+              </Button>
             </form>
           </div>
           <div>
@@ -123,10 +123,10 @@ class ListagemDeProdutos extends Component {
             </Link>
           </div>
           <section className="product-container">
-            {search.length === 0 ? (
+            {receiveAPI.length === 0 ? (
               <p>Nenhum produto foi encontrado</p>
             ) : (
-              search.map((produto) => (
+              receiveAPI.map((produto) => (
                 <section
                   key={ produto.id }
                   data-testid="product"
@@ -137,9 +137,10 @@ class ListagemDeProdutos extends Component {
                   />
                   <Button
                     datatest="product-add-to-cart "
-                    btnName="Adicionar ao Carrinho"
                     handleClick={ this.setProductLocalStorage }
-                  />
+                  >
+                    Adicionar ao Carrinho
+                  </Button>
                 </section>
               ))
             )}

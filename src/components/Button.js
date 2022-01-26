@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Button extends Component {
   render() {
     const {
-      btnName,
+      children,
       datatest,
       elementid,
       handleClick,
@@ -21,7 +21,7 @@ class Button extends Component {
         onClick={ handleClick }
         type={ type === 'button' ? 'button' : 'submit' }
       >
-        {btnName}
+        {children}
       </button>
     );
   }

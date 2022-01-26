@@ -17,8 +17,9 @@ class CardProduct extends Component {
         >
           <Button
             type="button"
-            btnName="Detalhes"
-          />
+          >
+            Detalhes
+          </Button>
         </Link>
       </>
 
