@@ -12,11 +12,12 @@ class ListagemDeProdutos extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
     this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
-
+    this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
+    // this.getDetails = this.getDetails.bind(this);
     this.state = {
       categories: [],
       inputValue: '',
-      search: [],
+      receiveAPI: [],
     };
   }
 
@@ -33,7 +34,21 @@ class ListagemDeProdutos extends Component {
 
   async getProductsListFromCategory({ target }) {
     const products = await getProductsFromCategoryAndQuery(target.id);
-    this.setState({ search: products.results });
+    this.setState({ receiveAPI: products.results });
+  }
+
+  setProductLocalStorage(id) {
+    const { receiveAPI } = this.state;
+    const productSave = receiveAPI.find((produto) => produto.id === id);
+    const arrayAntigo = localStorage.getItem('chave');
+
+    if (arrayAntigo !== null) {
+      const novoArray = [...JSON.parse(arrayAntigo), productSave];
+      localStorage.setItem('chave', JSON.stringify(novoArray));
+    } else {
+      const novoArray = [productSave];
+      localStorage.setItem('chave', JSON.stringify(novoArray));
+    }
   }
 
   async requestCategories() {
@@ -47,18 +62,23 @@ class ListagemDeProdutos extends Component {
     event.preventDefault(event);
     const { inputValue } = this.state;
     const resolve = await getProductsFromCategoryAndQuery('', inputValue);
+    console.log(resolve.results[0]);
     this.setState({
-      search: resolve.results,
+      receiveAPI: resolve.results,
     });
   }
 
   render() {
-    const { categories, inputValue, search } = this.state;
+    const { categories, inputValue, receiveAPI } = this.state;
     return (
       <section className="page-container">
         <div className="category-container">
           <div>
-            <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
+            <p
+              data-testid="home-initial-message"
+            >
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
           </div>
           <p>Categorias:</p>
           {categories.map(({ id, name }) => (
@@ -68,6 +88,7 @@ class ListagemDeProdutos extends Component {
                 data-testid="category"
                 name={ name }
                 id={ id }
+                className="category-btn"
                 onClick={ this.getProductsListFromCategory }
               >
                 {name}
@@ -75,8 +96,8 @@ class ListagemDeProdutos extends Component {
             </li>
           ))}
         </div>
-        <section className="search-container">
-          <div>
+        <section>
+          <div className="search-container">
             <form onSubmit={ (event) => this.categoryAndQuery(event) }>
               <Input
                 datatest="query-input"
@@ -87,13 +108,13 @@ class ListagemDeProdutos extends Component {
                 onInputChange={ this.handleChange }
               />
               <Button
-                btnName="Pesquisar"
                 datatest="query-button"
                 elementid="button-query"
-                handleClick={ () => {} }
-                name="isBtnDisable"
+                handleClick={ this.handleChange }
                 type="submit"
-              />
+              >
+                Pesquisar
+              </Button>
             </form>
           </div>
           <div>
@@ -102,11 +123,25 @@ class ListagemDeProdutos extends Component {
             </Link>
           </div>
           <section className="product-container">
-            {search.length === 0 ? (
+            {receiveAPI.length === 0 ? (
               <p>Nenhum produto foi encontrado</p>
             ) : (
-              search.map((produto) => (
-                <CardProduct searchResult={ produto } key={ produto.id } />
+              receiveAPI.map((produto) => (
+                <section
+                  key={ produto.id }
+                  data-testid="product"
+                  className="product-item-container"
+                >
+                  <CardProduct
+                    searchResult={ produto }
+                  />
+                  <Button
+                    datatest="product-add-to-cart"
+                    handleClick={ () => this.setProductLocalStorage(produto.id) }
+                  >
+                    Adicionar ao Carrinho
+                  </Button>
+                </section>
               ))
             )}
           </section>

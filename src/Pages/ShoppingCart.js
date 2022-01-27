@@ -25,25 +25,24 @@ class ShoppingCart extends Component {
   render() {
     const { getProduct } = this.state;
     return (
-      <>
-        <div>
-          <p data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </p>
-        </div>
-        <div>
-          <ul>
-            {getProduct.map((product) => (
-              <li key={ product.title }>
-                <p>{ product.id }</p>
-                <img src={ product.thumbnail } alt={ product.title } />
-                <p data-testid="shopping-cart-product-name">{ product.title }</p>
-                <p data-testid="shopping-cart-product-quantity">1</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </>
+      <div className="page-container">
+        {getProduct.length === 0
+          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          : (
+            <div>
+              <ul>
+                {getProduct.map((product) => (
+                  <li key={ product.title }>
+                    <p>{ product.id }</p>
+                    <img src={ product.thumbnail } alt={ product.title } />
+                    <p data-testid="shopping-cart-product-name">{ product.title }</p>
+                    <p data-testid="shopping-cart-product-quantity">1</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+      </div>
     );
   }
 }

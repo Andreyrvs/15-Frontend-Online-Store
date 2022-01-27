@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App" data-testid="home-initial-message">
+    <div className="App">
       <BrowserRouter>
         <Switch>
           <Route path="/product/:id" component={ ProductsDetails } />

@@ -1,0 +1,9 @@
+.page-container {
+  background-color: #e6e6e6;
+  display: flex;
+  flex-flow: row;
+  height: 920px;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 1440px;
+}
