@@ -18,7 +18,6 @@ class ListagemDeProdutos extends Component {
       categories: [],
       inputValue: '',
       receiveAPI: [],
-      productSave: {},
     };
   }
 
@@ -38,8 +37,9 @@ class ListagemDeProdutos extends Component {
     this.setState({ receiveAPI: products.results });
   }
 
-  setProductLocalStorage() {
-    const { productSave } = this.state;
+  setProductLocalStorage(id) {
+    const { receiveAPI } = this.state;
+    const productSave = receiveAPI.find((produto) => produto.id === id);
     const arrayAntigo = localStorage.getItem('chave');
 
     if (arrayAntigo !== null) {
@@ -136,8 +136,8 @@ class ListagemDeProdutos extends Component {
                     searchResult={ produto }
                   />
                   <Button
-                    datatest="product-add-to-cart "
-                    handleClick={ this.setProductLocalStorage }
+                    datatest="product-add-to-cart"
+                    handleClick={ () => this.setProductLocalStorage(produto.id) }
                   >
                     Adicionar ao Carrinho
                   </Button>
