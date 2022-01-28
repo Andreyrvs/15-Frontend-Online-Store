@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Button from '../components/Button';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
     this.state = {
       getProduct: [],
+      quantidade: 1,
     };
     this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
   }
@@ -22,8 +24,23 @@ class ShoppingCart extends Component {
     }
   }
 
+  increaseProductQuantity = () => {
+    this.setState((prevState) => ({
+      quantidade: prevState.quantidade + 1,
+    }));
+  };
+
+  decreaseProductQuantity = () => {
+    const { quantidade } = this.state;
+    if (quantidade > 1) {
+      this.setState((prevState) => ({
+        quantidade: prevState.quantidade - 1,
+      }));
+    }
+  };
+
   render() {
-    const { getProduct } = this.state;
+    const { getProduct, quantidade } = this.state;
     return (
       <div className="page-container">
         {getProduct.length === 0
@@ -36,7 +53,21 @@ class ShoppingCart extends Component {
                     <p>{ product.id }</p>
                     <img src={ product.thumbnail } alt={ product.title } />
                     <p data-testid="shopping-cart-product-name">{ product.title }</p>
-                    <p data-testid="shopping-cart-product-quantity">1</p>
+                    <Button
+                      datatest="product-decrease-quantity"
+                      type="button"
+                      handleClick={ this.increaseProductQuantity }
+                    >
+                      +
+                    </Button>
+                    <p data-testid="shopping-cart-product-quantity">{quantidade}</p>
+                    <Button
+                      datatest="product-increase-quantity"
+                      type="button"
+                      handleClick={ this.decreaseProductQuantity }
+                    >
+                      -
+                    </Button>
                   </li>
                 ))}
               </ul>
