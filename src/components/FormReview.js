@@ -51,28 +51,30 @@ class FormReview extends React.Component {
     const listReviews = (
       reviewItems.map((review, index) => (
         <div key={ index }>
-          <div>
-            <p>{ review.email }</p>
-            <p>{ review.score }</p>
-            <p>{ review.comments }</p>
-          </div>
+          <p>{ review.email }</p>
+          <p>{ review.score }</p>
+          <p>{ review.comments }</p>
         </div>
       ))
     );
 
     return (
-      <div>
+      <>
         <span>Avaliações</span>
         <form>
           <StarRating />
-          <input
-            type="email"
-            name="email"
-            data-testid="product-detail-email"
-            placeholder="Email"
-            value={ email }
-            onChange={ this.handleChange }
-          />
+          <label htmlFor="userEmail">
+            Email:
+            <input
+              type="email"
+              name="email"
+              data-testid="product-detail-email"
+              id="userEmail"
+              placeholder="Email"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+          </label>
           <textarea
             name="comments"
             data-testid="product-detail-evaluation"
@@ -89,10 +91,8 @@ class FormReview extends React.Component {
             Avaliar
           </button>
         </form>
-        <div>
-          { listReviews }
-        </div>
-      </div>
+        { listReviews }
+      </>
     );
   }
 }
