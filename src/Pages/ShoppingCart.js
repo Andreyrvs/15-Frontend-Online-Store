@@ -24,10 +24,17 @@ class ShoppingCart extends Component {
     }
   }
 
-  increaseProductQuantity = () => {
-    this.setState((prevState) => ({
-      quantidade: prevState.quantidade + 1,
-    }));
+  increaseProductQuantity = (product) => {
+    const { getProduct } = this.state;
+
+    if (getProduct.id === product.id) {
+      this.setState((prevState) => ({
+        quantidade: prevState.quantidade + 1,
+      }));
+      // this.setState((prevState) => ({
+      //   quantidade: prevState.quantidade + 1,
+      // }));
+    }
   };
 
   decreaseProductQuantity = () => {
@@ -56,11 +63,16 @@ class ShoppingCart extends Component {
                     <Button
                       datatest="product-decrease-quantity"
                       type="button"
-                      handleClick={ this.increaseProductQuantity }
+                      handleClick={ () => this.increaseProductQuantity(product.id) }
                     >
                       +
                     </Button>
-                    <p data-testid="shopping-cart-product-quantity">{quantidade}</p>
+                    <p
+                      data-testid="shopping-cart-product-quantity"
+                      id={ product.id }
+                    >
+                      {quantidade}
+                    </p>
                     <Button
                       datatest="product-increase-quantity"
                       type="button"
