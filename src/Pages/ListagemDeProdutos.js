@@ -13,7 +13,6 @@ class ListagemDeProdutos extends Component {
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
     this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
     this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
-    // this.getDetails = this.getDetails.bind(this);
     this.state = {
       categories: [],
       inputValue: '',
