@@ -31,9 +31,6 @@ class ShoppingCart extends Component {
       this.setState((prevState) => ({
         quantidade: prevState.quantidade + 1,
       }));
-      // this.setState((prevState) => ({
-      //   quantidade: prevState.quantidade + 1,
-      // }));
     } else {
       this.setState({
         quantidade: 1,
@@ -84,7 +81,7 @@ class ShoppingCart extends Component {
                       -
                     </Button>
                     <p>
-                      {`R$${quantidade * product.price}`}
+                      {`R$: ${quantidade * product.price}`}
                     </p>
 
                     <Button>
@@ -93,6 +90,9 @@ class ShoppingCart extends Component {
                   </li>
                 ))}
               </ul>
+              <p>
+                Total da compra:
+              </p>
             </div>
           )}
       </div>
