@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Button from '../components/Button';
+import ItemCart from '../components/ItemCart';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
     this.state = {
       getProduct: [],
-      quantidade: 1,
     };
     this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
   }
@@ -16,7 +15,7 @@ class ShoppingCart extends Component {
   }
 
   getFromLocalStorage() {
-    const arrayAntigo = localStorage.getItem('chave');
+    const arrayAntigo = localStorage.getItem('produto');
     if (arrayAntigo !== null) {
       this.setState(() => ({
         getProduct: JSON.parse(arrayAntigo),
@@ -24,31 +23,8 @@ class ShoppingCart extends Component {
     }
   }
 
-  increaseProductQuantity = (product) => {
-    const { getProduct } = this.state;
-
-    if (getProduct.id === product.id) {
-      this.setState((prevState) => ({
-        quantidade: prevState.quantidade + 1,
-      }));
-    } else {
-      this.setState({
-        quantidade: 1,
-      });
-    }
-  };
-
-  decreaseProductQuantity = () => {
-    const { quantidade } = this.state;
-    if (quantidade > 1) {
-      this.setState((prevState) => ({
-        quantidade: prevState.quantidade - 1,
-      }));
-    }
-  };
-
   render() {
-    const { getProduct, quantidade } = this.state;
+    const { getProduct } = this.state;
     return (
       <div className="page-container">
         {getProduct.length === 0
@@ -56,38 +32,8 @@ class ShoppingCart extends Component {
           : (
             <div>
               <ul>
-                {getProduct.map((product) => (
-                  <li key={ product.title }>
-                    <p>{ product.id }</p>
-                    <img src={ product.thumbnail } alt={ product.title } />
-                    <p data-testid="shopping-cart-product-name">{ product.title }</p>
-                    <Button
-                      datatest="product-decrease-quantity"
-                      type="button"
-                      handleClick={ () => this.increaseProductQuantity(product.id) }
-                    >
-                      +
-                    </Button>
-                    <p
-                      data-testid="shopping-cart-product-quantity"
-                    >
-                      {quantidade}
-                    </p>
-                    <Button
-                      datatest="product-increase-quantity"
-                      type="button"
-                      handleClick={ this.decreaseProductQuantity }
-                    >
-                      -
-                    </Button>
-                    <p>
-                      {`R$: ${quantidade * product.price}`}
-                    </p>
-
-                    <Button>
-                      X
-                    </Button>
-                  </li>
+                {getProduct.map((product, index) => (
+                  <ItemCart key={ product.id } data={ product } index={ index } />
                 ))}
               </ul>
               <p>
