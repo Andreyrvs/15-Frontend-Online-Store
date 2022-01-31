@@ -39,14 +39,15 @@ class ListagemDeProdutos extends Component {
   setProductLocalStorage(id) {
     const { receiveAPI } = this.state;
     const productSave = receiveAPI.find((produto) => produto.id === id);
-    const arrayAntigo = localStorage.getItem('chave');
+    const arrayAntigo = localStorage.getItem('produto');
 
     if (arrayAntigo !== null) {
-      const novoArray = [...JSON.parse(arrayAntigo), productSave];
-      localStorage.setItem('chave', JSON.stringify(novoArray));
+      const novoArray = [...JSON.parse(arrayAntigo),
+        { ...productSave, quantityToBuy: 1 }];
+      localStorage.setItem('produto', JSON.stringify(novoArray));
     } else {
-      const novoArray = [productSave];
-      localStorage.setItem('chave', JSON.stringify(novoArray));
+      const novoArray = [{ ...productSave, quantityToBuy: 1 }];
+      localStorage.setItem('produto', JSON.stringify(novoArray));
     }
   }
 
@@ -61,7 +62,6 @@ class ListagemDeProdutos extends Component {
     event.preventDefault(event);
     const { inputValue } = this.state;
     const resolve = await getProductsFromCategoryAndQuery('', inputValue);
-    console.log(resolve.results[0]);
     this.setState({
       receiveAPI: resolve.results,
     });
