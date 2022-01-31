@@ -1,7 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import setProductLocalStorage from '../services/HandleLocalStorage';
 
 class ProductsDetails extends React.Component {
   constructor() {

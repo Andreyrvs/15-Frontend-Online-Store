@@ -63,7 +63,6 @@ class ListagemDeProdutos extends Component {
     event.preventDefault(event);
     const { inputValue } = this.state;
     const resolve = await getProductsFromCategoryAndQuery('', inputValue);
-    console.log(resolve.results[0]);
     this.setState({
       receiveAPI: resolve.results,
     });
