@@ -13,7 +13,7 @@ class FormReview extends React.Component {
   }
 
   saveReviews = (event) => {
-    event.preventDefault();
+    event.preventDefault(event);
     const {
       score,
       email,
@@ -61,7 +61,7 @@ class FormReview extends React.Component {
     return (
       <>
         <span>Avaliações</span>
-        <form>
+        <form onSubmit={ (event) => this.saveReviews(event) }>
           <StarRating />
           <label htmlFor="userEmail">
             Email:
