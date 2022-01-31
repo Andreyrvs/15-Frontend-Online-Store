@@ -36,9 +36,6 @@ class ShoppingCart extends Component {
                   <ItemCart key={ product.id } data={ product } index={ index } />
                 ))}
               </ul>
-              <p>
-                Total da compra:
-              </p>
             </div>
           )}
       </div>
