@@ -34,6 +34,10 @@ class ShoppingCart extends Component {
       // this.setState((prevState) => ({
       //   quantidade: prevState.quantidade + 1,
       // }));
+    } else {
+      this.setState({
+        quantidade: 1,
+      });
     }
   };
 
@@ -69,7 +73,6 @@ class ShoppingCart extends Component {
                     </Button>
                     <p
                       data-testid="shopping-cart-product-quantity"
-                      id={ product.id }
                     >
                       {quantidade}
                     </p>
@@ -79,6 +82,13 @@ class ShoppingCart extends Component {
                       handleClick={ this.decreaseProductQuantity }
                     >
                       -
+                    </Button>
+                    <p>
+                      {`R$${quantidade * product.price}`}
+                    </p>
+
+                    <Button>
+                      X
                     </Button>
                   </li>
                 ))}
