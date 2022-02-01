@@ -6,7 +6,7 @@ class Checkout extends React.Component {
       <div>
         <form>
           <label htmlFor="id-name">
-            Nome completo
+            Nome
             <input
               data-testid="checkout-fullname"
               type="text"
