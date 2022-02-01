@@ -65,22 +65,30 @@ class FormReview extends React.Component {
         <span>Avaliações</span>
         <form>
           <StarRating />
-          <input
-            type="email"
-            name="email"
-            data-testid="product-detail-email"
-            placeholder="Email"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-          <textarea
-            name="comments"
-            data-testid="product-detail-evaluation"
-            rows="5"
-            placeholder="Mensagem (opcional)"
-            value={ comments }
-            onChange={ this.handleChange }
-          />
+          <label htmlFor="id-email">
+            Email
+            <input
+              id="id-email"
+              type="email"
+              name="email"
+              data-testid="product-detail-email"
+              placeholder="Email"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <label htmlFor="id-comments">
+            Comentários
+            <textarea
+              id="id-comments"
+              name="comments"
+              data-testid="product-detail-evaluation"
+              rows="5"
+              placeholder="Mensagem (opcional)"
+              value={ comments }
+              onChange={ this.handleChange }
+            />
+          </label>
           <button
             type="submit"
             data-testid="submit-review-btn"
