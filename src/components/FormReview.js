@@ -6,9 +6,7 @@ class FormReview extends React.Component {
     super();
 
     this.state = {
-      score: 0,
-      email: '',
-      comments: '',
+      reviewItems: JSON.parse(localStorage.getItem('reviewItems')) || [],
     };
   }
 
@@ -30,6 +28,19 @@ class FormReview extends React.Component {
     });
 
     localStorage.setItem('review', JSON.stringify(review));
+    // =======
+    //     event.preventDefault();
+    //     this.setState((prevState) => ({
+    //       reviewItems: [...prevState.reviewItems, {
+    //         email: prevState.email,
+    //         comments: prevState.comments,
+    //       }],
+    //     }), () => {
+    //       const { reviewItems } = this.state;
+    //       localStorage.setItem('reviewItems', JSON.stringify(reviewItems));
+    //       window.location.reload();
+    //     });
+    // >>>>>>> 9a9ee05d25f8134dd273d972011dfa3a01e0ce87
   }
 
   handleChange = ({ target }) => {
@@ -40,21 +51,25 @@ class FormReview extends React.Component {
   }
 
   render() {
-    const {
-      email,
-      comments,
-    } = this.state;
-    const { product } = this.props;
-    const items = JSON.parse(localStorage.getItem('reviews'));
-    const reviewItems = items || [];
+    // <<<<<<< HEAD
+    // const {
+    //   email,
+    //   comments,
+    // } = this.state;
+    // const { product } = this.props;
+    // const items = JSON.parse(localStorage.getItem('reviews'));
+    // const reviewItems = items || [];
 
+    // =======
+    const { reviewItems } = this.state;
+    // >>>>>>> 9a9ee05d25f8134dd273d972011dfa3a01e0ce87
     const listReviews = (
       reviewItems.filter((review, index) => (
         review.product.id === product.id
           ? <div key={ index }>
             <p>{ review.email }</p>
             <p>{ review.score }</p>
-            <p>{ comments }</p>
+            <p>{ review.comments }</p>
           </div>
           : 'Erro'
       ))
@@ -65,6 +80,7 @@ class FormReview extends React.Component {
         <span>Avaliações</span>
         <form onSubmit={ (event) => this.saveReviews(event) }>
           <StarRating />
+          {/* <<<<<<< HEAD
           <label htmlFor="userEmail">
             Email:
             <input
@@ -85,6 +101,30 @@ class FormReview extends React.Component {
             value={ comments }
             onChange={ this.handleChange }
           />
+======= */}
+          <label htmlFor="id-email">
+            Email
+            <input
+              id="id-email"
+              type="email"
+              name="email"
+              data-testid="product-detail-email"
+              placeholder="Email"
+              onChange={ this.handleChange }
+            />
+          </label>
+          <label htmlFor="id-comments">
+            Comentários
+            <textarea
+              id="id-comments"
+              name="comments"
+              data-testid="product-detail-evaluation"
+              rows="5"
+              placeholder="Mensagem (opcional)"
+              onChange={ this.handleChange }
+            />
+          </label>
+          {/* >>>>>>> 9a9ee05d25f8134dd273d972011dfa3a01e0ce87 */}
           <button
             type="submit"
             data-testid="submit-review-btn"
