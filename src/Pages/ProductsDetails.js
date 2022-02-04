@@ -31,15 +31,15 @@ class ProductsDetails extends React.Component {
     });
   }
 
-  toShoppingCart() {
-    const { product } = this.state;
-    const arrayAntigo = localStorage.getItem('chave');
+  toShoppingCart(product) {
+    // const { product } = this.state;
+    const arrayAntigo = localStorage.getItem('produto');
     if (arrayAntigo !== null) {
-      const novoArray = [...JSON.parse(arrayAntigo), product];
-      localStorage.setItem('chave', JSON.stringify(novoArray));
+      const novoArray = [...JSON.parse(arrayAntigo), { ...product, quantityToBuy: 1 }];
+      localStorage.setItem('produto', JSON.stringify(novoArray));
     } else {
-      const novoArray = [product];
-      localStorage.setItem('chave', JSON.stringify(novoArray));
+      const novoArray = [{ ...product, quantityToBuy: 1 }];
+      localStorage.setItem('produto', JSON.stringify(novoArray));
     }
   }
 
@@ -54,7 +54,7 @@ class ProductsDetails extends React.Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ this.toShoppingCart }
+          onClick={ () => this.toShoppingCart(product) }
         >
           Adicionar ao Carrinho
         </button>

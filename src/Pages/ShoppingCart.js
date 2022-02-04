@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import ItemCart from '../components/ItemCart';
 
 class ShoppingCart extends Component {
   constructor() {
@@ -14,7 +16,7 @@ class ShoppingCart extends Component {
   }
 
   getFromLocalStorage() {
-    const arrayAntigo = localStorage.getItem('chave');
+    const arrayAntigo = localStorage.getItem('produto');
     if (arrayAntigo !== null) {
       this.setState(() => ({
         getProduct: JSON.parse(arrayAntigo),
@@ -31,14 +33,12 @@ class ShoppingCart extends Component {
           : (
             <div>
               <ul>
-                {getProduct.map((product) => (
-                  <li key={ product.title }>
-                    <p>{ product.id }</p>
-                    <img src={ product.thumbnail } alt={ product.title } />
-                    <p data-testid="shopping-cart-product-name">{ product.title }</p>
-                    <p data-testid="shopping-cart-product-quantity">1</p>
-                  </li>
+                {getProduct.map((product, index) => (
+                  <ItemCart key={ product.id } data={ product } index={ index } />
                 ))}
+                <Link to="/checkout" data-testid="checkout-products">
+                  Finalizar
+                </Link>
               </ul>
             </div>
           )}
