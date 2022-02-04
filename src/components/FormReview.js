@@ -5,31 +5,51 @@ class FormReview extends React.Component {
   constructor() {
     super();
 
+    // this.state = {
+    //   score: 0,
+    //   email: '',
+    //   comments: '',
+    // };
+
     this.state = {
-      score: 0,
-      email: '',
-      comments: '',
+      reviewItems: JSON.parse(localStorage.getItem('reviewItems')) || [],
     };
   }
 
+  // saveReviews = (event) => {
+  //   event.preventDefault(event);
+  //   const {
+  //     email,
+  //     comments,
+  //   } = this.state;
+  //   const { product } = this.props;
+  //   const review = JSON.parse(localStorage.getItem('review')) || [];
+
+  //   review.push({
+  //     email: [...review, email],
+  //     comments: [...review, comments],
+  //     productId: product.id,
+  //   });
+
+  //   // review.push({
+  //   //   reviews: [...review, { email, comments, productId: product.id }],
+  //   // });
+
+  //   localStorage.setItem('review', JSON.stringify(review));
+  // }
+
   saveReviews = (event) => {
-    event.preventDefault(event);
-    const {
-      score,
-      email,
-      comments,
-    } = this.state;
-    const { product } = this.props;
-    const review = JSON.parse(localStorage.getItem('review')) || [];
-
-    review.push({
-      score,
-      emailAll: [...review, email],
-      commentsAll: [...review, comments],
-      productId: product.id,
+    event.preventDefault();
+    this.setState((prevState) => ({
+      reviewItems: [...prevState.reviewItems, {
+        email: prevState.email,
+        comments: prevState.comments,
+      }],
+    }), () => {
+      const { reviewItems } = this.state;
+      localStorage.setItem('reviewItems', JSON.stringify(reviewItems));
+      // window.location.reload();
     });
-
-    localStorage.setItem('review', JSON.stringify(review));
   }
 
   handleChange = ({ target }) => {
@@ -40,23 +60,25 @@ class FormReview extends React.Component {
   }
 
   render() {
-    const {
-      email,
-      comments,
-    } = this.state;
+    // const {
+    //   email,
+    //   comments,
+    // } = this.state;
+    const { reviewItems } = this.state;
+
     const { product } = this.props;
-    const items = JSON.parse(localStorage.getItem('reviews'));
-    const reviewItems = items || [];
+    // const items = JSON.parse(localStorage.getItem('reviews'));
+    // const reviewItems = items || [];
 
     const listReviews = (
-      reviewItems.filter((review, index) => (
-        review.product.id === product.id
-          ? <div key={ index }>
-            <p>{ review.email }</p>
-            <p>{ review.score }</p>
-            <p>{ comments }</p>
-            </div>
-          : 'Erro'
+      reviewItems.map((review, index) => (
+
+        <div key={ index }>
+          <p>{ review.email }</p>
+          <p>{ review.score }</p>
+          <p>{ review.comments }</p>
+        </div>
+
       ))
     );
 
@@ -73,7 +95,7 @@ class FormReview extends React.Component {
               data-testid="product-detail-email"
               id="userEmail"
               placeholder="Email"
-              value={ email }
+              // value={ email }
               onChange={ this.handleChange }
             />
           </label>
@@ -82,7 +104,7 @@ class FormReview extends React.Component {
             data-testid="product-detail-evaluation"
             rows="5"
             placeholder="Mensagem (opcional)"
-            value={ comments }
+            // value={ comments }
             onChange={ this.handleChange }
           />
           <button
