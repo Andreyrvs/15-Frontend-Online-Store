@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StarRating from './StarRating';
 
 class FormReview extends React.Component {
@@ -64,7 +65,6 @@ class FormReview extends React.Component {
               data-testid="product-detail-email"
               id="userEmail"
               placeholder="Email"
-              // value={ email }
               onChange={ this.handleChange }
             />
           </label>
@@ -73,7 +73,6 @@ class FormReview extends React.Component {
             data-testid="product-detail-evaluation"
             rows="5"
             placeholder="Mensagem (opcional)"
-            // value={ comments }
             onChange={ this.handleChange }
           />
           <button
@@ -90,5 +89,9 @@ class FormReview extends React.Component {
     );
   }
 }
+
+FormReview.propTypes = {
+  product: PropTypes.object,
+}.isRequire;
 
 export default FormReview;
