@@ -19,17 +19,17 @@ class FormReview extends React.Component {
       email,
       comments,
     } = this.state;
-
-    const review = localStorage.reviews ? JSON.parse(localStorage.reviews) : [];
+    const { product } = this.props;
+    const review = JSON.parse(localStorage.getItem('review')) || [];
 
     review.push({
       score,
-      email,
-      comments,
+      emailAll: [...review, email],
+      commentsAll: [...review, comments],
+      productId: product.id,
     });
 
-    localStorage.setItem('reviews', JSON.stringify(review));
-    window.location.reload();
+    localStorage.setItem('review', JSON.stringify(review));
   }
 
   handleChange = ({ target }) => {
@@ -44,17 +44,19 @@ class FormReview extends React.Component {
       email,
       comments,
     } = this.state;
-
+    const { product } = this.props;
     const items = JSON.parse(localStorage.getItem('reviews'));
-    const reviewItems = (items && items.length) ? items : [];
+    const reviewItems = items || [];
 
     const listReviews = (
-      reviewItems.map((review, index) => (
-        <div key={ index }>
-          <p>{ review.email }</p>
-          <p>{ review.score }</p>
-          <p>{ review.comments }</p>
-        </div>
+      reviewItems.filter((review, index) => (
+        review.product.id === product.id
+          ? <div key={ index }>
+            <p>{ review.email }</p>
+            <p>{ review.score }</p>
+            <p>{ comments }</p>
+          </div>
+          : 'Erro'
       ))
     );
 
@@ -86,12 +88,13 @@ class FormReview extends React.Component {
           <button
             type="submit"
             data-testid="submit-review-btn"
-            onClick={ this.saveReviews }
           >
             Avaliar
           </button>
         </form>
-        { listReviews }
+        <div>
+          { listReviews }
+        </div>
       </>
     );
   }

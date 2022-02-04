@@ -62,7 +62,7 @@ class ProductsDetails extends React.Component {
           <Link to="/ShoppingCart" data-testid="shopping-cart-button">
             Ícone Carrinho de Compras
           </Link>
-          <FormReview />
+          <FormReview product={ product } />
         </div>
       </div>
     );
