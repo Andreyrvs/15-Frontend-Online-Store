@@ -6,30 +6,22 @@ class FormReview extends React.Component {
     super();
 
     this.state = {
-      score: 0,
-      email: '',
-      comments: '',
+      reviewItems: JSON.parse(localStorage.getItem('reviewItems')) || [],
     };
   }
 
   saveReviews = (event) => {
     event.preventDefault();
-    const {
-      score,
-      email,
-      comments,
-    } = this.state;
-
-    const review = localStorage.reviews ? JSON.parse(localStorage.reviews) : [];
-
-    review.push({
-      score,
-      email,
-      comments,
+    this.setState((prevState) => ({
+      reviewItems: [...prevState.reviewItems, {
+        email: prevState.email,
+        comments: prevState.comments,
+      }],
+    }), () => {
+      const { reviewItems } = this.state;
+      localStorage.setItem('reviewItems', JSON.stringify(reviewItems));
+      window.location.reload();
     });
-
-    localStorage.setItem('reviews', JSON.stringify(review));
-    window.location.reload();
   }
 
   handleChange = ({ target }) => {
@@ -40,14 +32,7 @@ class FormReview extends React.Component {
   }
 
   render() {
-    const {
-      email,
-      comments,
-    } = this.state;
-
-    const items = JSON.parse(localStorage.getItem('reviews'));
-    const reviewItems = (items && items.length) ? items : [];
-
+    const { reviewItems } = this.state;
     const listReviews = (
       reviewItems.map((review, index) => (
         <div key={ index }>
@@ -73,7 +58,6 @@ class FormReview extends React.Component {
               name="email"
               data-testid="product-detail-email"
               placeholder="Email"
-              value={ email }
               onChange={ this.handleChange }
             />
           </label>
@@ -85,7 +69,6 @@ class FormReview extends React.Component {
               data-testid="product-detail-evaluation"
               rows="5"
               placeholder="Mensagem (opcional)"
-              value={ comments }
               onChange={ this.handleChange }
             />
           </label>
