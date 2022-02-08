@@ -151,6 +151,7 @@ class ListagemDeProdutos extends Component {
                   />
                   <Button
                     datatest="product-add-to-cart"
+                    classN="category-btn"
                     handleClick={ () => this.setProductLocalStorage(produto.id) }
                   >
                     Adicionar ao Carrinho

@@ -35,10 +35,10 @@ class ProductsDetails extends React.Component {
   }
 
   getCartSize() {
-    const sizeLocalStorage = JSON.parse(localStorage.getItem('produto')).length;
-    console.log(sizeLocalStorage);
+    const cartLocalStorage = JSON.parse(localStorage.getItem('produto'));
+
     this.setState({
-      cartSize: sizeLocalStorage,
+      cartSize: cartLocalStorage ? cartLocalStorage.length : 0,
     });
   }
 
