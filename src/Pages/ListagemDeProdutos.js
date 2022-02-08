@@ -13,15 +13,18 @@ class ListagemDeProdutos extends Component {
     this.categoryAndQuery = this.categoryAndQuery.bind(this);
     this.getProductsListFromCategory = this.getProductsListFromCategory.bind(this);
     this.setProductLocalStorage = this.setProductLocalStorage.bind(this);
+    this.getCartSize = this.getCartSize.bind(this);
     this.state = {
       categories: [],
       inputValue: '',
       receiveAPI: [],
+      cartSize: '',
     };
   }
 
   componentDidMount() {
     this.requestCategories();
+    this.getCartSize();
   }
 
   handleChange({ target }) {
@@ -49,6 +52,15 @@ class ListagemDeProdutos extends Component {
       const novoArray = [{ ...productSave, quantityToBuy: 1 }];
       localStorage.setItem('produto', JSON.stringify(novoArray));
     }
+    this.getCartSize();
+  }
+
+  getCartSize() {
+    const cartLocalStorage = JSON.parse(localStorage.getItem('produto'));
+
+    this.setState({
+      cartSize: cartLocalStorage ? cartLocalStorage.length : 0,
+    });
   }
 
   async requestCategories() {
@@ -68,7 +80,7 @@ class ListagemDeProdutos extends Component {
   }
 
   render() {
-    const { categories, inputValue, receiveAPI } = this.state;
+    const { categories, inputValue, receiveAPI, cartSize } = this.state;
     return (
       <section className="page-container">
         <div className="category-container">
@@ -120,6 +132,9 @@ class ListagemDeProdutos extends Component {
             <Link to="/ShoppingCart" data-testid="shopping-cart-button">
               Ícone Carrinho de Compras
             </Link>
+            <span data-testid="shopping-cart-size">
+              {`Quantidade: ${cartSize}`}
+            </span>
           </div>
           <section className="product-container">
             {receiveAPI.length === 0 ? (

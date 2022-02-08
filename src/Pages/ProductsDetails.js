@@ -8,13 +8,16 @@ class ProductsDetails extends React.Component {
     super();
     this.state = {
       product: {},
+      cartSize: '',
     };
     this.getDetails = this.getDetails.bind(this);
     this.toShoppingCart = this.toShoppingCart.bind(this);
+    this.getCartSize = this.getCartSize.bind(this);
   }
 
   componentDidMount() {
     this.getDetails();
+    this.getCartSize();
   }
 
   async getProductsDetails(queryDetails) {
@@ -31,6 +34,14 @@ class ProductsDetails extends React.Component {
     });
   }
 
+  getCartSize() {
+    const sizeLocalStorage = JSON.parse(localStorage.getItem('produto')).length;
+    console.log(sizeLocalStorage);
+    this.setState({
+      cartSize: sizeLocalStorage,
+    });
+  }
+
   toShoppingCart(product) {
     // const { product } = this.state;
     const arrayAntigo = localStorage.getItem('produto');
@@ -44,9 +55,17 @@ class ProductsDetails extends React.Component {
   }
 
   render() {
-    const { product } = this.state;
+    const { product, cartSize } = this.state;
     return (
       <div>
+        <section>
+          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+            Ícone Carrinho de Compras
+          </Link>
+          <span data-testid="shopping-cart-size">
+            {`Quantidade: ${cartSize}`}
+          </span>
+        </section>
         <p>{product.id}</p>
         <p data-testid="product-detail-name">{product.title}</p>
         <img src={ product.thumbnail } alt={ product.title } />
@@ -59,9 +78,6 @@ class ProductsDetails extends React.Component {
           Adicionar ao Carrinho
         </button>
         <div>
-          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
-            Ícone Carrinho de Compras
-          </Link>
           <FormReview product={ product } />
         </div>
       </div>
