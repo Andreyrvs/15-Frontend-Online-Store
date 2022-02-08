@@ -11,6 +11,7 @@ class Button extends Component {
       name,
       type,
       value,
+      classN,
     } = this.props;
     return (
       <button
@@ -19,6 +20,7 @@ class Button extends Component {
         id={ elementid }
         name={ name }
         onClick={ handleClick }
+        className={ classN }
         type={ type === 'button' ? 'button' : 'submit' }
       >
         {children}
