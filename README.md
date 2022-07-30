@@ -1,5 +1,3 @@
-
-
 # Online Store
 
 ## Contexto
