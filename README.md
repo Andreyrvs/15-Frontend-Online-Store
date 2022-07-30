@@ -1,16 +1,59 @@
-# 🚧 README em construção 🚧
+bericvinicius81
+andregraczyk
+matheus-a-f
+eliaspaiva
 
-<!-- Olá, Tryber!
+# Online Store
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
+## Contexto
 
-É essencial que você preencha esse documento por conta própria, ok?
+Este projeto trata-se de uma loja online sem persistência no banco de dados. Consome a API do mercado livre para buscar os produtos por catigorias e termos
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+* Enpoints Utilizados:
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
+  > Categorias:
+  [API Mercado livre categories](https://api.mercadolibre.com/sites/MLB/categories) </br>
+  > buscar itens de uma categoria por termo:
+  [API Mercado livre Search category id](https://api.mercadolibre.com/sites/MLB/search?category=$CATEGORY_ID&q=$QUERY) </br>
+  > buscar detalhes de um item especifico:
+  [API Mercado livre Mercado livre product id](https://api.mercadolibre.com/items/$PRODUCT_ID) </br>
+  
+## Técnologias usadas
 
--->
+Front-end:
+> Desenvolvido usando: React, React Router, CSS3, ES6
+
+## Instalando Dependências
+
+clone o repositório:
+
+```bash
+git clone git@github.com:Andreyrvs/frontend-online-store.git
+```
+
+> Frontend
+
+```bash
+cd frontend-online-store/
+npm install
+```
+
+## Executando aplicação
+
+* Para rodar o front-end:
+
+  ```bash
+    npm start
+  ```
+
+## Executando Testes
+
+* Para rodar todos os testes de linter:
+
+  ```bash
+    npm run lint
+  ```
+
+  ```bash
+    npm run lint:styles
+  ```
