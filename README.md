@@ -1,13 +1,15 @@
-bericvinicius81
-andregraczyk
-matheus-a-f
-eliaspaiva
+
 
 # Online Store
 
 ## Contexto
 
 Este projeto trata-se de uma loja online sem persistência no banco de dados. Consome a API do mercado livre para buscar os produtos por catigorias e termos
+
+Colegas que contribuiram com o projeto:
+@andregraczyk
+@matheus-a-f
+@eliaspaiva
 
 * Enpoints Utilizados da API Mercado livre:
 
