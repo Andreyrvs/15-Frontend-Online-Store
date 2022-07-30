@@ -1,5 +1,7 @@
 # Online Store
 
+![Imagem da Store](./Aplicacao.png)
+
 ## Contexto
 
 Este projeto trata-se de uma loja online sem persistência no banco de dados. Consome a API do mercado livre para buscar os produtos por catigorias e termos
