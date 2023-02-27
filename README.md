@@ -4,7 +4,7 @@
 
 Este projeto trata-se de uma loja online sem persistência no banco de dados. Consome a API do mercado livre para buscar os produtos por catigorias e termos
 
-Colegas que contribuiram com o projeto:
+Colegas que contribuirão com o projeto:
 
 - [@andregraczyk](https://github.com/andregraczyk "github")
 - [@matheus-a-f](https://github.com/matheus-a-f "github")
