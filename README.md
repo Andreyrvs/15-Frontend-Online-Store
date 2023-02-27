@@ -17,28 +17,28 @@ Front-end:
 
 ## Preview da Aplicação
 
-| ![Login](./aplicacao) | ![Home](./aplicacao-home.png) |
+| ![Login](./aplicacao-e.png) | ![Home](./aplicacao-d.png) |
 | ----------- | ----------- |
 
 ## Instalando Dependências
 
-clone o repositório:
+- Clone o projeto:
 
-```bash
-git clone git@github.com:Andreyrvs/frontend-online-store.git
-```
+  ```bash
+  git clone git@github.com:Andreyrvs/15-Frontend-Online-Store.git
+  ```
 
-> Front-end
+  > Front-end
 
-```bash
-cd frontend-online-store/
-npm install
-```
+  ```bash
+  cd 15-Frontend-Online-Store
+  npm install
+  ```
 
 ## Executando aplicação
 
-* Para rodar o Front-end:
+- Para rodar o Front-end:
 
   ```bash
-    npm start
+  cd src/ && npm start
   ```
