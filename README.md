@@ -5,18 +5,10 @@
 Este projeto trata-se de uma loja online sem persistência no banco de dados. Consome a API do mercado livre para buscar os produtos por catigorias e termos
 
 Colegas que contribuiram com o projeto:
-@andregraczyk
-@matheus-a-f
-@eliaspaiva
 
-* Enpoints Utilizados da API Mercado livre:
-
-  > Categorias:
-  [categories](https://api.mercadolibre.com/sites/MLB/categories) </br>
-  > buscar itens de uma categoria por termo:
-  [category id](https://api.mercadolibre.com/sites/MLB/search?category=$CATEGORY_ID&q=$QUERY) </br>
-  > buscar detalhes de um item especifico:
-  [product id](https://api.mercadolibre.com/items/$PRODUCT_ID) </br>
+- [@andregraczyk](https://github.com/andregraczyk "github")
+- [@matheus-a-f](https://github.com/matheus-a-f "github")
+- [@eliaspaiva](https://github.com/eliaspaiva "github")
   
 ## Técnologias usadas
 
