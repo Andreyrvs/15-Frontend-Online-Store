@@ -1,7 +1,5 @@
 # Online Store
 
-![Imagem da Store](./Aplicacao.png)
-
 ## Contexto
 
 Este projeto trata-se de uma loja online sem persistência no banco de dados. Consome a API do mercado livre para buscar os produtos por catigorias e termos
@@ -25,6 +23,11 @@ Colegas que contribuiram com o projeto:
 Front-end:
 > Desenvolvido usando: React, React Router, CSS3, ES6
 
+## Preview da Aplicação
+
+| ![Login](./aplicacao) | ![Home](./aplicacao-home.png) |
+| ----------- | ----------- |
+
 ## Instalando Dependências
 
 clone o repositório:
@@ -33,7 +36,7 @@ clone o repositório:
 git clone git@github.com:Andreyrvs/frontend-online-store.git
 ```
 
-> Frontend
+> Front-end
 
 ```bash
 cd frontend-online-store/
@@ -42,20 +45,8 @@ npm install
 
 ## Executando aplicação
 
-* Para rodar o front-end:
+* Para rodar o Front-end:
 
   ```bash
     npm start
-  ```
-
-## Executando Testes
-
-* Para rodar todos os testes de linter:
-
-  ```bash
-    npm run lint
-  ```
-
-  ```bash
-    npm run lint:styles
   ```
